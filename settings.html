@@ -1,0 +1,19 @@
+<div ng-controller="amazonSettingsCtrl">
+    <div class="form-case">
+        <h3>Amazon Cloudfront</h3>
+
+        <label>Access Key</label>
+        <input type="text" ng-model="amazon.accessKey"><br />
+
+        <label>Secret Key</label>
+        <input type="text" ng-model="amazon.secretKey"><br />
+
+        <label>Bucket</label>
+        <input type="text" ng-model="amazon.bucket"><br />
+
+        <label>Cloudfront URL</label>
+        <input type="text" ng-model="amazon.cloudfrontURL"><br />
+
+        <button class="success-button" ng-click="save()">Save</button>
+    </div>
+</div>
