@@ -1,9 +1,9 @@
 {
     "name": "Amazon Cloudfront",
     "module": "amazonCloudfront",
-	"install": "app/install.php",
-	"uninstall": "app/uninstall.php",
+    "install": "app/install.php",
+    "uninstall": "app/uninstall.php",
     "scripts": ["amazon-cloudfront.minify.js"],
-	"settings": "settings.html",
+    "settings": "settings.html",
     "version": "0.0.1"
 }
