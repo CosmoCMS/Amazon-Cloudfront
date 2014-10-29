@@ -7,18 +7,20 @@ angular.module('amazonCloudfront', [])
         
         // Get the cloudfront URL
         $http.get('modules/amazon-cloudfront/app/settings.php').success(function(data){
-            // Modify image URLs
-            var cloudfrontURL = function(image){
-                if(image){
-                    if(image.indexOf('uploads/') === 0)
-                        return data.url + image.replace(/\uploads/, '');
-                    else
+            if(data){
+                // Modify image URLs
+                var cloudfrontURL = function(image){
+                    if(image){
+                        if(image.indexOf('uploads/') === 0)
+                            return data.url + image.replace(/\uploads/, '');
+                        else
+                            return image;
+                    } else
                         return image;
-                } else
-                    return image;
-            };
-            
-            Hooks.imageHook(cloudfrontURL);
+                };
+                
+                Hooks.imageHook(cloudfrontURL);
+            }
         });
         
         // Watch for image uploads, upload to S3/Cloudfront
@@ -46,7 +48,6 @@ angular.module('amazonCloudfront', [])
                 bucket: $scope.amazon.bucket,
                 cloudfrontURL: $scope.amazon.cloudfrontURL
             }).success(function(data){
-                console.log(data);
                 $rootScope.$broadcast('notify', {message: 'Settings Updated'});
             });
         };

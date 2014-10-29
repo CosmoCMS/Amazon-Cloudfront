@@ -1,22 +1,16 @@
 <?php
 
-include '../../../core/app/autoload.php';
-include '../../../core/app/Cosmo.class.php';
+require_once '../../../core/app/autoload.php';
+require_once '../../../core/app/Cosmo.class.php';
 $Cosmo = new Cosmo($pdo, $prefix, $salt);
 
-// Check permissions for autorized requests
-if($_SERVER['HTTP_USERNAME'] && $_SERVER['HTTP_TOKEN'])
-{
-    if($Cosmo->tokenValidate($_SERVER['HTTP_USERNAME'], $_SERVER['HTTP_TOKEN'])){
-        $username = $_SERVER['HTTP_USERNAME'];
-        $role = $Cosmo->usersRead(null, $username);
+// Check permissions for authorized requests
+if($Cosmo->tokensRead($_SERVER['HTTP_USERSID'], $_SERVER['HTTP_TOKEN'])){
+    if($Cosmo->usersRead($_SERVER['HTTP_USERSID'])['role'] === 'admin')
+    {
+        // This record will be used for settings when they set them up
+        $Cosmo->miscCreate('amazonCloudfrontSettings', '');
     }
-}
-
-if($role === 'admin'){
-
-    $Cosmo->miscCreate('amazonCloudfrontSettings', '');
-    
 }
 
 ?>
